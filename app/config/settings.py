@@ -22,6 +22,21 @@ class Settings(BaseSettings):
     jwt_algorithm: str = Field(default="HS256", alias="JWT_ALGORITHM")
     jwt_expire_minutes: int = Field(default=60, alias="JWT_EXPIRE_MINUTES")
 
+    # Seleção de provedor de LLM ("azure" | "anthropic")
+    llm_provider: str = Field(default="azure", alias="LLM_PROVIDER")
+
+    # Anthropic (Claude) — provedor alternativo
+    anthropic_api_key: str = Field(default="", alias="ANTHROPIC_API_KEY")
+    anthropic_model_principal: str = Field(
+        default="claude-sonnet-5", alias="ANTHROPIC_MODEL_PRINCIPAL"
+    )
+    anthropic_model_fallback: str = Field(
+        default="claude-opus-4-8", alias="ANTHROPIC_MODEL_FALLBACK"
+    )
+    anthropic_max_tokens: int = Field(default=4096, alias="ANTHROPIC_MAX_TOKENS")
+    anthropic_max_retries: int = Field(default=3, alias="ANTHROPIC_MAX_RETRIES")
+    anthropic_timeout_seconds: int = Field(default=60, alias="ANTHROPIC_TIMEOUT_SECONDS")
+
     # Azure OpenAI
     azure_openai_endpoint: str = Field(alias="AZURE_OPENAI_ENDPOINT")
     azure_openai_api_key: str = Field(alias="AZURE_OPENAI_API_KEY")

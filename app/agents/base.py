@@ -15,7 +15,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
-from app.services.llm.azure_client import AzureLLMFactory, ModelTier
+from app.services.llm.azure_client import ModelTier
+from app.services.llm.factory import LLMFactory
 from app.utils.logging import get_logger
 
 TOutput = TypeVar("TOutput", bound=BaseModel)
@@ -34,7 +35,7 @@ class BaseAgent(ABC, Generic[TOutput]):
     tier_fallback: ModelTier = "gpt-4.1"
     prompt_version: str = "1.0.0"
 
-    def __init__(self, llm_factory: AzureLLMFactory) -> None:
+    def __init__(self, llm_factory: LLMFactory) -> None:
         self._llm_factory = llm_factory
         self._prompts_dir = Path(__file__).parent / self.nome / "prompts"
 

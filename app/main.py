@@ -10,7 +10,7 @@ from app.config.settings import get_settings
 from app.database.session import unit_of_work
 from app.orchestrator.graph import AnaliseOrchestrator
 from app.repositories.credit_analysis import RuleRepository
-from app.services.llm.azure_client import AzureLLMFactory
+from app.services.llm.factory import get_llm_factory
 from app.utils.logging import configure_logging, get_logger
 
 logger = get_logger(__name__)
@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         regras = await RuleRepository(session).carregar_regras_ativas()
     logger.info("regras_carregadas", quantidade=len(regras))
     app.state.orchestrator = AnaliseOrchestrator(
-        llm_factory=AzureLLMFactory(settings),
+        llm_factory=get_llm_factory(settings),
         regras_vigentes=regras,
     )
     yield

@@ -1,0 +1,28 @@
+# Regras sistemicas: politicas do sistema financeiro / compliance / bureau.
+category: sistemica
+rules:
+  - id: SIS001
+    description: "Score minimo de bureau para qualquer concessao"
+    expr: "credit_score >= 300"
+    severity: BLOCKER
+
+  - id: SIS002
+    description: "Solicitante nao pode estar em lista restritiva (blacklist)"
+    expr: "is_blacklisted == False"
+    severity: BLOCKER
+
+  - id: SIS003
+    description: "Idade minima de 18 anos"
+    expr: "age >= 18"
+    severity: BLOCKER
+
+  - id: SIS004
+    description: "Comprometimento de renda (DTI) sistemico maximo de 70%"
+    expr: "dti <= 0.70"
+    severity: BLOCKER
+
+  - id: SIS005
+    description: "Alerta de score baixo para revisao"
+    when: "credit_score < 500"
+    expr: "credit_score >= 500"
+    severity: WARNING

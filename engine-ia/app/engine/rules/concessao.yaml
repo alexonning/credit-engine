@@ -1,0 +1,17 @@
+# Regras de concessao: limites e condicoes do ato de conceder o credito.
+category: concessao
+rules:
+  - id: CON001
+    description: "Valor solicitado dentro do limite maximo por multiplo de renda (10x)"
+    expr: "amount <= monthly_income * 10"
+    severity: BLOCKER
+
+  - id: CON002
+    description: "Parcela estimada nao pode exceder 30% da renda liquida"
+    expr: "estimated_installment <= monthly_income * 0.30"
+    severity: WARNING
+
+  - id: CON003
+    description: "Prazo minimo de 6 meses"
+    expr: "term_months >= 6"
+    severity: INFO

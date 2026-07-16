@@ -1,0 +1,33 @@
+# --- API ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+
+# --- Config / Models ---
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-dotenv==1.0.1
+
+# --- Orchestration / LLM ---
+langgraph==0.2.60
+langchain-core==0.3.28
+langchain-openai==0.2.14
+openai==1.59.3
+anthropic==0.116.0
+
+# --- Data / Cache ---
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+alembic==1.14.0
+redis==5.2.1
+
+# --- Rules ---
+pyyaml==6.0.2
+
+# --- Observability ---
+structlog==24.4.0
+
+# --- Tests ---
+pytest==8.3.4
+pytest-asyncio==0.25.1
+httpx==0.28.1

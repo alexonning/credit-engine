@@ -17,7 +17,7 @@ from app.decision_engine.engine import DecisionEngine
 from app.orchestrator.state import AnaliseState
 from app.rule_engine.engine import RuleEngine
 from app.rule_engine.models import Regra
-from app.services.llm.azure_client import AzureLLMFactory
+from app.services.llm.factory import LLMFactory
 from app.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -26,7 +26,7 @@ logger = get_logger(__name__)
 class AnaliseOrchestrator:
     def __init__(
         self,
-        llm_factory: AzureLLMFactory,
+        llm_factory: LLMFactory,
         regras_vigentes: list[Regra],
     ) -> None:
         self._cadastro = CadastroService(CadastroAgent(llm_factory))

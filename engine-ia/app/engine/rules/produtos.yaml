@@ -1,0 +1,45 @@
+# Regras por produto: cada produto de credito tem parametros proprios.
+category: produto
+rules:
+  # ---- CDC (Credito Direto ao Consumidor) ----
+  - id: PRD_CDC_001
+    description: "CDC: valor maximo de R$ 50.000"
+    product_scope: ["CDC"]
+    expr: "amount <= 50000"
+    severity: BLOCKER
+  - id: PRD_CDC_002
+    description: "CDC: prazo maximo de 48 meses"
+    product_scope: ["CDC"]
+    expr: "term_months <= 48"
+    severity: WARNING
+
+  # ---- CONSIGNADO ----
+  - id: PRD_CON_001
+    description: "Consignado: exige vinculo empregaticio ou aposentadoria"
+    product_scope: ["CONSIGNADO"]
+    expr: "employment_status == 'employed' or employment_status == 'retired'"
+    severity: BLOCKER
+  - id: PRD_CON_002
+    description: "Consignado: prazo maximo de 84 meses"
+    product_scope: ["CONSIGNADO"]
+    expr: "term_months <= 84"
+    severity: WARNING
+
+  # ---- CARTAO ----
+  - id: PRD_CAR_001
+    description: "Cartao: limite maximo de 3x a renda mensal"
+    product_scope: ["CARTAO"]
+    expr: "amount <= monthly_income * 3"
+    severity: BLOCKER
+
+  # ---- HOME_EQUITY ----
+  - id: PRD_HE_001
+    description: "Home Equity: valor minimo de R$ 30.000"
+    product_scope: ["HOME_EQUITY"]
+    expr: "amount >= 30000"
+    severity: BLOCKER
+  - id: PRD_HE_002
+    description: "Home Equity: prazo entre 24 e 240 meses"
+    product_scope: ["HOME_EQUITY"]
+    expr: "term_months >= 24 and term_months <= 240"
+    severity: WARNING

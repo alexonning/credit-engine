@@ -1,0 +1,23 @@
+# Regras internas: politica de risco da propria instituicao (apetite de risco).
+category: interna
+rules:
+  - id: INT001
+    description: "Score interno minimo para aprovacao automatica"
+    expr: "credit_score >= 550"
+    severity: WARNING
+
+  - id: INT002
+    description: "Renda mensal minima exigida"
+    expr: "monthly_income >= 1200"
+    severity: BLOCKER
+
+  - id: INT003
+    description: "Comprometimento de renda interno maximo de 50%"
+    expr: "dti <= 0.50"
+    severity: WARNING
+
+  - id: INT004
+    description: "Cliente empregado ou aposentado para credito sem garantia"
+    when: "product_code == 'CDC' or product_code == 'CARTAO'"
+    expr: "employment_status == 'employed' or employment_status == 'retired'"
+    severity: WARNING
